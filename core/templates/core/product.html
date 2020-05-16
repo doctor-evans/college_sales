@@ -1,0 +1,102 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+
+  <main class="mt-5 pt-4">
+    <div class="container dark-grey-text mt-5">
+
+      <!--Grid row-->
+      <div class="row wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-md-6 mb-4">
+
+          <img src="{{ item.image.url }}" class="img-fluid" alt="">
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-md-6 mb-4">
+
+          <!--Content-->
+          <div class="p-4">
+
+            <div class="mb-3">
+              <a href="">
+              </a>
+            </div>
+
+            <p class="lead">
+              {% if item.discount_price %}
+              <span class="mr-1">
+                &#8358;<del>{{ item.price }}</del>
+              </span>
+              &#8358;<span>{{ item.discount_price }}</span>
+              {% else %}
+              &#8358;<span>{{ item.price }}</span>
+              {% endif %}
+            </p>
+
+            <p class="lead font-weight-bold">Description</p>
+
+            <p>{{ item.description }}</p>
+
+
+            <a href="{% url 'core:contact_merchant' item.id %}" class="btn btn-primary btn-md my-0 p">
+              CONTACT MERCHANT
+            </a>
+            <a href="{% url 'core:home' %}" class="btn btn-dark btn-md my-0 p">
+              GO BACK TO HOME PAGE
+            </a>
+
+          </div>
+          <!--Content-->
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+      <hr>
+
+      <div style='color:skyblue'>
+        <h5 style='font-size:20px; font-weight:bold;'>
+          <strong> Other Products by this Merchant
+          </strong>
+        </h5>
+      </div>
+      <hr>
+      <!--Grid row-->
+      <div class="row wow fadeIn">
+
+
+      {% for related in related_items %}
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-6 mb-4">
+
+
+          <a href="{% url 'core:product' related.id %}">
+            <div class="mask rgba-white-slight">
+              <img src="{{ related.image.url }}" class="img-fluid" alt="" style='width:150px; height:90px '>
+            </div>
+          </a>
+          <h5>
+            <strong>
+              <a href="{% url 'core:product' related.id %}" class="dark-grey-text">{{ related.title }}
+              </a>
+            </strong>
+          </h5>
+        </div>
+        <!--Grid column-->
+      {% endfor %}
+
+
+      </div>
+      <!--Grid row-->
+
+    </div>
+  </main>
+
+{% endblock content %}

@@ -1,0 +1,28 @@
+{% extends "core/base.html" %}
+
+{% load crispy_forms_tags %}
+
+
+
+{% block head_title %}
+    College Trade
+{% endblock %}
+{% block content %}
+  <main style='background-color:gray'>
+    <div class="container">
+      <section class="mb-4">
+        <div class="row wow fadeIn">
+          <div class='col-6 offset-3'>
+          <form  method="POST" action="{% url 'core:new_item' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button class="btn btn-primary" type="submit">Add Item</button>
+          </form>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+
+{% endblock content %}
