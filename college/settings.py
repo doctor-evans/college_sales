@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -169,3 +170,6 @@ if os.getcwd() == '/app':
     STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static_in_env')]
     STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
+
+    
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
