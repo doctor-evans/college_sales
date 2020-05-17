@@ -132,8 +132,6 @@
     </style>
   </head>
   <body>
-    <div class="navbar">
-
       <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
           <div class="container">
 
@@ -209,7 +207,6 @@
           </div>
         </nav>
 
-    </div>
     <div class="wrapper">
       {% if user.profile.profile_picture %}
       <div class="left">
@@ -263,4 +260,6 @@
        </div>
     </div>
   </body>
+  {% include "core/scripts.html" %}
+
 </html>
