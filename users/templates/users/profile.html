@@ -157,7 +157,13 @@
                     <span class="sr-only">(current)</span>
                   </a>
                 </li>{% endcomment %}
+                <li class="nav-item">
+                  <a class="nav-link waves-effect" href="{% url 'users:update_profile' user.profile.id %}">
+                    <span class="clearfix d-none d-sm-inline-block"> Update Profile </span>
+                  </a>
+                </li>
               </ul>
+
 
               <!-- Right -->
               <ul class="navbar-nav nav-flex-icons">

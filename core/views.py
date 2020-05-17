@@ -86,7 +86,7 @@ def add_new_item(request):
     if request.method != 'POST':
         form = ItemForm()
     else:
-        form = ItemForm(request.POST)
+        form = ItemForm(request.POST, request.FILES)
         if form.is_valid():
             new_item = form.save(commit=False)
             new_item.owner = request.user
@@ -106,7 +106,7 @@ def edit_item(request, item_id):
     if request.method !='POST':
         form = EditItemForm(instance = item)
     else:
-        form = EditItemForm(instance = item, data = request.POST)
+        form = EditItemForm(request.POST, request.FILES, instance = item)
         if form.is_valid():
             form.save()
             return redirect('users:user_items')
