@@ -1,11 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, View
-from .models import Item, Category
+from .models import Item, Category, ItemGallery
 from .forms import ItemForm
 from users.forms import EditItemForm
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.core.paginator import Paginator
+from django.forms import modelformset_factory
 
 
 def home_page(request):
@@ -83,17 +84,27 @@ def spec_category(request, slug):
 
 @login_required
 def add_new_item(request):
+    Imageformset = modelformset_factory(ItemGallery, fields=('image',), extra=3)
     if request.method != 'POST':
         form = ItemForm()
+        formset = Imageformset(queryset=ItemGallery.objects.none())
     else:
         form = ItemForm(request.POST, request.FILES)
-        if form.is_valid():
+        formset = Imageformset(request.POST, request.FILES)
+        if form.is_valid() and formset.is_valid():
             new_item = form.save(commit=False)
             new_item.owner = request.user
             new_item.save()
-            return redirect('core:home')
+            for f in formset:
+                try:
+                    photo = ItemGallery(item=new_item, image=f.cleaned_data['image'])
+                    photo.save()
+                except Exception as e:
+                    break
+            return redirect('users:user_items')
     context = {
-            'form':form
+            'form':form,
+            'formset':formset
     }
     return render(request, 'core/new_item.html', context)
 

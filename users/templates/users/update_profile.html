@@ -1,18 +1,31 @@
 {% extends "core/base.html" %}
+
 {% load crispy_forms_tags %}
 
 
 
+{% block head_title %}
+    College Trade
+{% endblock %}
 {% block content %}
-  <div class="container">
-    <p> {{ user.username }}</p>
-  </div>
-  <div class="container">
-    <form method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button class="btn btn-primary" type="submit">Update</button>
-    </form>
-  </div>
+  <main style='background-color:gray'>
+    <div class="container">
+      <strong style="font-size:25px; font-weight:bold">{{ user.username | title}}</strong>
+    </div>
+    <div class="container">
+      <section class="mb-4">
+        <div class="row wow fadeIn">
+          <div class='col-6 offset-3'>
+            <form method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <button class="btn btn-primary" type="submit">Update</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
 
 {% endblock content %}

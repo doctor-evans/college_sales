@@ -39,7 +39,9 @@ class Item(models.Model):
     def __str__(self):
         return self.title
 
-    #def get_absolute_url(self):
-        #return reverse("core:product", kwargs={
-            #'slug': self.slug
-        #})
+class ItemGallery(models.Model):
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to = 'photos/', blank=True, null=True)
+
+    def __str__(self):
+        return self.item.title + 'image'

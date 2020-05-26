@@ -11,241 +11,153 @@
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/style.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/responsive.css' %}" rel="stylesheet">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
     <title>Merchant contact Page</title>
-    <style type="text/css">
-    *{
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      list-style: none;
-      font-family: sans-serif;
-    }
-
-
-    body{
-      background: #f3f3f3;
-    }
-
-
-    .wrapper{
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100%;
-      display: flex;
-      box-shadow: 20px 10px 20px 10px rgba(90, 90, 100, 0.08);
-    }
-    .wrapper .left{
-      width: 35%;
-      background: linear-gradient(to right, #01a9ac, #01dbdf);
-      padding: 30px 25px;
-      border-top-left-radius: 5px;
-      border-bottom-left-radius: 5px;
-      text-align: center;
-      color: #fff
-    }
-    .wrapper .left img{
-      margin-bottom: 10px;
-      border-radius: 50%;
-    }
-    .wrapper .left h4{
-      margin-bottom: 10px
-    }
-    .wrapper .left p{
-      font-size: 12px;
-    }
-
-    .wrapper .right{
-      width: 65%;
-      background: #fff;
-      border-top-right-radius: 5px;
-      border-bottom-right-radius: 5px;
-      padding: 30px 25px;
-    }
-
-    .wrapper .right .info,
-    .wrapper .right .projects{
-      margin-bottom: 25px
-    }
-
-    .wrapper .right .info h3,
-    .wrapper .right .projects h3{
-      margin-bottom: 15px;
-      padding-bottom: 5px;
-      border-bottom: 1px solid #e0e0e0;
-      color: #353c4e;
-      text-transform: uppercase;
-      letter-spacing: 5px;
-    }
-
-    .wrapper .right .info_data,
-    .wrapper .right .projects_data{
-      display: grid;
-      justify-content: space-between;
-    }
-
-    .wrapper .right .info_data .data,
-    .wrapper .right .projects_data .data{
-      width: 100%
-    }
-
-    .wrapper .right .info_data .data h4,
-    .wrapper .right .projects_data .data h4{
-      color: #353c4e;
-      margin-bottom: 5px;
-
-    }
-
-    .wrapper .right .info_data .data p{
-      font-size: 13px;
-      margin-bottom: 10px;
-      color: #919aa3;
-    }
-
-    .wrapper .right .projects_data .data p{
-      font-size: 13px;
-      margin-bottom: 10px;
-      color: #919aa3;
-      word-wrap: break-word;
-      width: 45%
-    }
-
-
-    .wrapper .social_media ul{
-      display: flex;
-    }
-
-    .wrapper .social_media ul li{
-      width: 45px;
-      height: 45px;
-      background: linear-gradient(to right, #01a9ac, #01dbdf);
-      margin-right: 10px;
-      line-height: 45px;
-      border-radius: 5px;
-      text-align: center;
-    }
-
-    .wrapper .social_media ul li a{
-      color: #fff;
-      display: block;
-      font-size: 18px
-    }
-
-    </style>
   </head>
   <body>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
-        <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand waves-effect" href="{% url 'core:home' %}">
+        <strong class="blue-text">College Trade</strong>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class ="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="#"> merchant <span class="sr-only">(current)</span></a>
+          </li>
+          <br>
+          <br>
 
-          <!-- Brand -->
-          <a class="navbar-brand waves-effect" href="{% url 'core:home' %}">
-            <strong class="blue-text">College Trade</strong>
-          </a>
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'account_logout' %}">Log out</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'users:profile' %}">My Profile</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="{% url 'account_login' %}">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="{% url 'account_signup' %}">Signup</a>
+          </li>
+          {% endif %}
+        </ul>
 
-          <!-- Collapse -->
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <!-- Links -->
-          <div class="collapse navbar-collapse" id ="navbarSupportedContent">
-            <!-- Left -->
-            <ul class="navbar-nav mr-auto">
-              {% comment %} <li class="nav-item active">
-                <a class="nav-link waves-effect" href="/">Home
-                  <span class="sr-only">(current)</span>
-                </a>
-              </li>{% endcomment %}
-            </ul>
-
-            <!-- Right -->
-            <ul class="navbar-nav nav-flex-icons">
-            {% if user.is_authenticated %}
-              <li class="nav-item">
-                <a class="nav-link waves-effect" href="{% url 'account_logout' %}">
-                  <span class="clearfix d-none d-sm-inline-block"> Logout </span>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link waves-effect" href="{% url 'users:profile' %}">
-                  <span class="clearfix d-none d-sm-inline-block"> My Profile </span>
-                </a>
-              </li>
-
-              {% else %}
-              <li class="nav-item">
-                <a class="nav-link waves-effect" href="{% url 'account_login' %}">
-                  <span class="clearfix d-none d-sm-inline-block"> Login </span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link waves-effect" href="{% url 'account_signup' %}">
-                  <span class="clearfix d-none d-sm-inline-block"> Signup </span>
-                </a>
-              </li>
-              {% endif %}
-            </ul>
-          </div>
-
-        </div>
-      </nav>
-
-    <div class="wrapper">
-      {% if item.owner.profile.profile_picture %}
-      <div class="left">
-        <img src="{{ item.owner.profile.profile_picture.url }}" alt="user" width="200" height="200">
-        <h4>{{ item.owner.first_name }} {{ item.owner.last_name }}</h4>
-        <p>{{ item.owner.profile.department }}, department</p>
-        <p>{{ item.owner.profile.level }} L</p>
       </div>
-      {% else %}
-      <div class="left">
-        <img src="/media/profile/images.png" alt="user" width="200" height="200">
-        <h4 style="text-shadow:5px 10px 5px #93968f;">{{ item.owner.first_name }} {{ item.owner.last_name }}</h4>
-        <p>{{ item.owner.profile.department }}, department</p>
-        <p>{{ item.owner.profile.level }} L</p>
-      </div>
-      {% endif %}
-      <div class="right">
-        <div class="info">
-          <h3>information</h3>
-          <div class="info_data">
-            <div class="data">
-              <h4>Email</h4>
-              <p>{{ item.owner.profile.email }}</p>
-            </div>
-            <div class="data">
-              <h4>phone</h4>
-              <p>{{ item.owner.profile.phone_no }}</p>
-            </div>
-            <div class="data">
-              <h4>whatsApp Number</h4>
-              <p>{{ item.owner.profile.whatsapp_no }}</p>
-            </div>
-          </div>
-        </div>
+    </nav>
+    <section class="intro-section">
+  		<div class="container">
 
-        <div class="projects">
-          <h3>About me</h3>
-          <div class="projects_data">
-            <div class="data">
-              <p>{{ item.owner.profile.bio }}</p>
-            </div>
-          </div>
+  			<div class="heading-wrapper">
+  				<div class="row">
+  					<div class="col-sm-6 col-md-6 col-lg-4">
+  						<div class="info">
+                <i class="fa fa-home" aria-hidden="true"></i>
+  							<div class="right-area">
+  								<h5>Ekpoma</h5>
+  								<h5>Edo state</h5>
+  							</div><!-- right-area -->
+  						</div><!-- info -->
+  					</div><!-- col-sm-4 -->
+
+  					<div class="col-sm-6 col-md-6 col-lg-4">
+  						<div class="info">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+  							<div class="right-area">
+  								<h5>{{ item.owner.profile.phone_no }}</h5>
+  								<h6>MON - SAT, 8AM - 8PM</h6>
+  							</div><!-- right-area -->
+  						</div><!-- info -->
+  					</div><!-- col-sm-4 -->
+
+  					<div class="col-sm-6 col-md-6 col-lg-4">
+  						<div class="info">
+                <i class="fa fa-commenting-o" aria-hidden="true"></i>
+  							<div class="right-area">
+  								<h5>contact me via whatsApp</h5>
+  								<h6>REPLY IN 24 HOURS</h6>
+  							</div><!-- right-area -->
+  						</div><!-- info -->
+  					</div><!-- col-sm-4 -->
+  				</div><!-- row -->
+  			</div><!-- heading-wrapper -->
+
+
+
+  			<div class="intro">
+  				<div class="row">
+        {% if item.owner.profile.profile_picture %}
+  					<div class="col-sm-8 col-md-4 col-lg-3">
+  						<div class="profile-img margin-b-30"><img src="{{ item.owner.profile.profile_picture.url }}" alt=""></div>
+  					</div><!-- col-sm-8 -->
+        {% else %}
+        <div class="col-sm-8 col-md-4 col-lg-3">
+          <div class="profile-img margin-b-30"><img src="/media/profile/images.png" alt=""></div>
         </div>
-        <div class="social_media">
-          <ul>
-            <li><a href="{{ item.owner.profile.facebook_link }}" target="_blank"><i class="fab fa-facebook-f mr-3"></i></a></li>
-            <li><a href="{{ item.owner.profile.twitter_link }}" target="_blank"><i class="fab fa-twitter mr-3"></i></a></li>
-            <li><a href="{{ item.owner.profile.intagram_link }}" target="_blank"><i class="fab fa-instagram mr-3"></i></a></li>
-          </ul>
-        </div>
-       </div>
-    </div>
+        {% endif %}
+
+  					<div class="col-sm-10 col-md-5 col-lg-6">
+  							<h2><b>{{ item.owner.first_name }} {{ item.owner.last_name }}</b></h2>
+  							<h4 class="font-yellow">Key Account Manager</h4>
+  							<ul class="information margin-tb-30">
+  								<li><b class="font-yellow">DEPARTMENT</b> : {{ item.owner.profile.department }}</li>
+                  <li><b class="font-yellow">LEVEL</b> : {{ item.owner.profile.level }}</li>
+  								<li><b class="font-yellow">EMAIL</b> : {{ item.owner.profile.email }}</li>
+  								<li><b class="font-yellow">PHONE NUMBER</b> : {{ item.owner.profile.phone_no }}</li>
+  								<li><b class="font-yellow">whatsApp NUMBER</b> : {{ item.owner.profile.whatsapp_no }}</li>
+  							</ul>
+  							<ul class="social-icons">
+                  <li><a href="{{ item.owner.profile.facebook_link }}" target="_blank"><i class="fab fa-facebook-f mr-3"></i></a></li>
+                  <li><a href="{{ item.owner.profile.twitter_link }}" target="_blank"><i class="fab fa-twitter mr-3"></i></a></li>
+                  <li><a href="{{ item.owner.profile.intagram_link }}" target="_blank"><i class="fab fa-instagram mr-3"></i></a></li>
+  							</ul>
+  					</div><!-- col-sm-8 -->
+
+
+  				</div><!-- row -->
+
+  			</div><!-- intro -->
+  		</div><!-- container -->
+  	</section><!-- intro-section -->
+
+
+  	<section class="about-section section">
+  		<div class="container">
+  			<div class="row">
+  				<div class="col-sm-12 col-md-3">
+  					<div class="heading">
+  						<h3><b>About me</b></h3>
+  					</div>
+  				</div><!-- col-sm-3 -->
+  				<div class="col-sm-12 col-md-9">
+  					<p class="margin-b-50">
+              {{ item.owner.profile.bio }}
+            </p>
+
+
+  				</div><!-- col-sm-9 -->
+  			</div><!-- row -->
+  		</div><!-- container -->
+  	</section><!-- about-section -->
+
+
     {% include "core/scripts.html" %}
 
   </body>
+  <footer>
+  <p class="copyright">
+    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Chancity
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  </p>
+</footer>
 </html>

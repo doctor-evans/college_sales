@@ -16,6 +16,7 @@
           <form  method="POST" action="{% url 'core:new_item' %}" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form|crispy }}
+            {{ formset.as_table }}
             <button class="btn btn-primary" type="submit">Add Item</button>
           </form>
           </div>

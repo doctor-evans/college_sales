@@ -12,21 +12,25 @@
       <div class='container'><p><strong>Select a category</strong></p></div>
       <br>
       <br>
+      <div class="row">
+
+
         {% for category in categories %}
         <ul>
-          <li><a href="{{ category.get_absolute_url }}">
-            <div class="row wow fadeIn">
-              <div class="col-lg-3 col-md-10 mb-4">
-                <div class="card">
+
+          <a href="{{ category.get_absolute_url }}">
+              <div class="col">
+                  <li>
                     {{ category.text }}
-                </div>
-              </div>
+                  </li>
             </div>
-            </a>
-          </li>
+          </a>
+
         </ul>
 
+
         {% endfor %}
+    </div>
 
     </div>
   </main>
